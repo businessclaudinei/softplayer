@@ -1,0 +1,3 @@
+D:\Projetos\API\softplan\Softplayer\TaxaJurosApi\obj\Debug\netcoreapp2.2\TaxaJurosApi.csproj.CoreCompileInputs.cache
+D:\Projetos\API\softplan\Softplayer\TaxaJurosApi\obj\Debug\netcoreapp2.2\TaxaJurosApi.AssemblyInfoInputs.cache
+D:\Projetos\API\softplan\Softplayer\TaxaJurosApi\obj\Debug\netcoreapp2.2\TaxaJurosApi.AssemblyInfo.cs

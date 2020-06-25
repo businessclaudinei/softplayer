@@ -1,0 +1,3 @@
+D:\Projetos\API\softplan\Softplayer\CalculadoraDeJurosApi\obj\Debug\netcoreapp2.2\CalculadoraDeJurosApi.csproj.CoreCompileInputs.cache
+D:\Projetos\API\softplan\Softplayer\CalculadoraDeJurosApi\obj\Debug\netcoreapp2.2\CalculadoraDeJurosApi.AssemblyInfoInputs.cache
+D:\Projetos\API\softplan\Softplayer\CalculadoraDeJurosApi\obj\Debug\netcoreapp2.2\CalculadoraDeJurosApi.AssemblyInfo.cs
