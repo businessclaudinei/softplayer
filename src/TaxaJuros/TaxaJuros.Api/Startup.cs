@@ -1,12 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using TaxaJuros.Infrastruture.Data.Query.Queries.GetInterestRate;
 
 namespace TaxaJurosApi
 {
@@ -24,6 +29,8 @@ namespace TaxaJurosApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             ConfigureSwagger(services);
+
+            services.AddMediatR(typeof(GetInterestRateQueryHandler).Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -37,13 +44,31 @@ namespace TaxaJurosApi
                 app.UseHsts();
             }
 
+            app.UseRequestLocalization(SetUpLocalization());
+
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Taxa Juros API V1");
             });
 
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private RequestLocalizationOptions SetUpLocalization()
+        {
+            var culture = new CultureInfo(Configuration["AppLocale"]);
+
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(culture: culture, uiCulture: culture)
+            };
+
+            localizationOptions.SupportedCultures.Add(culture);
+            localizationOptions.SupportedUICultures.Add(culture);
+
+            return localizationOptions;
         }
 
         private void ConfigureSwagger(IServiceCollection services)

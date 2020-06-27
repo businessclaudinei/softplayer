@@ -8,14 +8,21 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.2\TaxaJurosApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\TaxaJuros.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaxaJuros.Domain\TaxaJuros.Domain.csproj" />
+    <ProjectReference Include="..\TaxaJuros.Infrastruture.Data.Query\TaxaJuros.Infrastruture.Data.Query.csproj" />
   </ItemGroup>
 
 </Project>
