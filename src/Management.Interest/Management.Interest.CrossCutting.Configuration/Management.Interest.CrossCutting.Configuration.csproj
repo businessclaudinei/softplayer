@@ -5,7 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CustomModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Management.Interest.CrossCutting.Exception\Management.Interest.CrossCutting.Exception.csproj" />
   </ItemGroup>
 
 </Project>

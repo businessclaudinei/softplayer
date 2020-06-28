@@ -1,4 +1,8 @@
-﻿using Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate;
+﻿using FluentValidation.AspNetCore;
+using Management.Interest.Api.Filters;
+using Management.Interest.CrossCutting.Configuration.AppModels;
+using Management.Interest.CrossCutting.Configuration.Extensions;
+using Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +29,14 @@ namespace Management.Interest
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => {
+                options.Filters.Add<ValidatorFilter>();
+            })
+               .AddFluentValidation(fvc =>
+                  fvc.RegisterValidatorsFromAssemblyContaining<GetInterestRateQueryValidator>())
+               .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddGlobalExceptionHandlerMiddleware();
 
             ConfigureSwagger(services);
 
@@ -51,13 +62,14 @@ namespace Management.Interest
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Gerenciamento de Juros V1");
             });
 
+            app.UseGlobalExceptionHandlerMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
 
         private RequestLocalizationOptions SetUpLocalization()
         {
-            var culture = new CultureInfo(Configuration["AppLocale"]);
+            var culture = new CultureInfo(AppSettings.Settings.AppLocale);
 
             var localizationOptions = new RequestLocalizationOptions
             {

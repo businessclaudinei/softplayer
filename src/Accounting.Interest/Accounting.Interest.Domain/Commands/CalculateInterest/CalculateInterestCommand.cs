@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
 namespace Accounting.Interest.Domain.Commands.CalculateInterest
@@ -6,7 +8,7 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
     public class CalculateInterestCommand : IRequest<CalculateInterestCommandResponse>
     {
         [JsonProperty("timeInMonths")]
-        public short TimeInMonths { get; set; }
+        public int TimeInMonths { get; set; }
 
         [JsonProperty("principal")]
         public decimal Principal { get; set; }
