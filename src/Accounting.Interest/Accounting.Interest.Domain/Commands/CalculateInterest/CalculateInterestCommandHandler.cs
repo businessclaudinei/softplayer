@@ -25,7 +25,7 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
             if (cachedValue != null)
             {
                 compoundInterestAmount = JsonConvert.DeserializeObject<decimal>(cachedValue);
-                await _responseCacheService.CacheResponseAsync("test", compoundInterestAmount++, new TimeSpan(0, 0, 20)).ConfigureAwait(false);
+                await _responseCacheService.CacheResponseAsync("test", compoundInterestAmount+1, new TimeSpan(0, 0, 20)).ConfigureAwait(false);
             }
             else
             {
