@@ -1,7 +1,9 @@
 ﻿using Accounting.Interest.CrossCutting.Configuration.AppModels;
 using Accounting.Interest.CrossCutting.Configuration.Extensions;
+using Accounting.Interest.CrossCutting.Configuration.Mapper;
 using Accounting.Interest.Domain.Commands.CalculateInterest;
 using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
+using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -37,10 +39,16 @@ namespace Accounting.Interest.Api
                    fvc.RegisterValidatorsFromAssemblyContaining<CalculateInterestCommandValidator>())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.AddGlobalExceptionHandlerMiddleware();
 
             ConfigureSwagger(services);
 
+            services.AddAutoMapper();
             services.AddMediatR(typeof(CalculateInterestCommandHandler).Assembly);
             services.AddMediatR(typeof(ShowMeTheCodeQueryHandler).Assembly);
         }
@@ -99,6 +107,31 @@ namespace Accounting.Interest.Api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
             });
+        }
+    }
+
+    public static class CustomMvcServiceCollectionExtensions
+    {
+        public static void AddAutoMapper(this IServiceCollection services)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+            var config = new AutoMapperConfiguration().Configure();
+            services.AddSingleton(sp => config.CreateMapper());
+        }
+    }
+
+    public class AutoMapperConfiguration
+    {
+        public MapperConfiguration Configure()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<ExceptionProfile>();
+            });
+            return config;
         }
     }
 }

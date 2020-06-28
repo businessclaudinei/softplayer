@@ -1,21 +1,22 @@
-﻿using Accounting.Interest.Domain.Commands.CalculateInterest;
+﻿using Accounting.Interest.CrossCutting.Configuration.ExceptionModels;
+using Accounting.Interest.Domain.Commands.CalculateInterest;
 using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using FluentValidation;
-using Accounting.Interest.CrossCutting.Configuration.ExceptionModels;
 
 namespace Accounting.Interest.Api.Controllers
 {
     [Route("api/interest/v1")]
+    [ApiController]
     public class InterestController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public InterestController(IMediator mediator)
+        public InterestController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
         }

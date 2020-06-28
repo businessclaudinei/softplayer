@@ -27,11 +27,11 @@ namespace Accounting.Interest.CrossCutting.Configuration.ExceptionModels
 
         public class NotificationObject
         {
-            [JsonProperty("message")]
-            public string Message { get; set; }
-
             [JsonProperty("responseCode")]
             public HttpStatusCode ResponseCode { get; set; }
+
+            [JsonProperty("message")]
+            public string Message { get; set; }
 
             [JsonProperty("details")]
             public System.Exception Details { get; set; }
