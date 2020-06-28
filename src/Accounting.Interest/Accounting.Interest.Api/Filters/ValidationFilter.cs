@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using Accounting.Interest.CrossCutting.Exception;
+using Accounting.Interest.CrossCutting.Exception.Base;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 public class ValidatorFilter : IAsyncActionFilter
 {
@@ -15,26 +16,10 @@ public class ValidatorFilter : IAsyncActionFilter
                 FieldName = e.Key,
                 Message = m.ErrorMessage
             }));
-            context.Result = new BadRequestObjectResult(new ErrorResponse { Errors = errorsInState });
-            return;
+            //context.Result = new BadRequestObjectResult();
+            throw new BadRequestCustomException(errorsInState, "A entrada de dados da requisição está incorreta.");
         }
         await next();
-    }
-
-    public async Task OnActionExecutingAsync(ActionExecutingContext context)
-    {
-        if (!context.ModelState.IsValid)
-        {
-
-        }
-    }
-
-    public async Task OnActionExecutedAsync(ActionExecutingContext context)
-    {
-        if (!context.ModelState.IsValid)
-        {
-
-        }
     }
 
 }

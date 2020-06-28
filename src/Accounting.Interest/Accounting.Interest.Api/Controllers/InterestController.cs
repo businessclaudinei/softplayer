@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using FluentValidation;
+using Accounting.Interest.CrossCutting.Configuration.ExceptionModels;
 
 namespace Accounting.Interest.Api.Controllers
 {
     [Route("api/interest/v1")]
-    [ApiController]
     public class InterestController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -36,12 +36,12 @@ namespace Accounting.Interest.Api.Controllers
         /// </p>
         /// </remarks>
         /// <returns>CalculateInterestCommandResponse</returns>
-        [HttpPost("/calcula-juros")]
+        [HttpPost("calcula-juros")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(CalculateInterestCommandResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(DefaultExceptionResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(DefaultExceptionResponse), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<CalculateInterestCommandResponse>> CalculateCompoundInterest([FromBody] CalculateInterestCommand command)
         {
             return await _mediator.Send(command);
@@ -62,7 +62,7 @@ namespace Accounting.Interest.Api.Controllers
         /// </p>
         /// </remarks>
         /// <returns>ShowMeTheCodeQueryResponse</returns>
-        [HttpGet("/show-me-the-code")]
+        [HttpGet("show-me-the-code")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(ShowMeTheCodeQueryResponse), StatusCodes.Status200OK)]

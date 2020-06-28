@@ -1,6 +1,11 @@
-﻿namespace Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate
+﻿using FluentValidation;
+
+namespace Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate
 {
-    public class GetInterestRateQueryValidator
+    public class GetInterestRateQueryValidator : AbstractValidator<GetInterestRateQuery>
     {
+        public GetInterestRateQueryValidator()
+        {
+        }
     }
 }

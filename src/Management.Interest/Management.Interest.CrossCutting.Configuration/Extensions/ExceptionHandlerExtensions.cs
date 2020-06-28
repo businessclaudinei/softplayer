@@ -1,7 +1,6 @@
-﻿using Accounting.Interest.CrossCutting.Configuration.AppModels;
-using Accounting.Interest.CrossCutting.Configuration.ExceptionModels;
-using Accounting.Interest.CrossCutting.Exception.Base;
-using Accounting.Interest.CrossCutting.Exceptions.Base;
+﻿using Management.Interest.CrossCutting.Configuration.AppModels;
+using Management.Interest.CrossCutting.Configuration.ExceptionModels;
+using Management.Interest.CrossCutting.Exception.Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +9,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Accounting.Interest.CrossCutting.Configuration.Extensions
+namespace Management.Interest.CrossCutting.Configuration.Extensions
 {
     public static class GlobalExceptionHandlerMiddlewareExtensions
     {

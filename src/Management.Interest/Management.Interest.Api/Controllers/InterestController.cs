@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate;
+using Management.Interest.CrossCutting.Configuration.ExceptionModels;
 
 namespace Management.Interest.Controllers
 {
@@ -19,12 +20,12 @@ namespace Management.Interest.Controllers
         }
 
         /// <summary>
-        /// Busca valores v1.
+        /// Obter Taxa de Juros v1.
         /// </summary>
         /// <remarks>
         /// <p>
         /// <b>Descricao: </b><br />
-        /// Este metodo busca os valores xpto filtrados por parametros.<br />
+        /// Este método é responsável por obter a taxa de juros. A resposta deste método contém a taxa de juros.<br />
         /// Nota, o parametro id e obrigatorio. <br />
         /// </p>
         /// <br />
@@ -33,11 +34,12 @@ namespace Management.Interest.Controllers
         /// Nenhum.
         /// </p>
         /// </remarks>
-        [HttpGet("/taxa-juros")]
+        [HttpGet("taxa-juros")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(GetInterestRateQueryResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(DefaultExceptionResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(DefaultExceptionResponse), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<GetInterestRateQueryResponse>> GetInterestRate()
         {
             return await _mediator.Send(new GetInterestRateQuery());

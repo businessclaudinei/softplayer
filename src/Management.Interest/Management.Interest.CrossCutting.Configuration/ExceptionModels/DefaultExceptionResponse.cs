@@ -1,4 +1,4 @@
-﻿using Accounting.Interest.CrossCutting.Exception;
+﻿using Management.Interest.CrossCutting.Exception.Base;
 using Microsoft.Win32.SafeHandles;
 using Newtonsoft.Json;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Runtime.InteropServices;
 
-namespace Accounting.Interest.CrossCutting.Configuration.ExceptionModels
+namespace Management.Interest.CrossCutting.Configuration.ExceptionModels
 {
     public class DefaultExceptionResponse : IDisposable
     {

@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace Accounting.Interest.CrossCutting.Configuration.AppModels
+namespace Management.Interest.CrossCutting.Configuration.AppModels
 {
     public class AppSettings
     {
@@ -13,7 +13,7 @@ namespace Accounting.Interest.CrossCutting.Configuration.AppModels
             AppSettings appSettings = null;
             using (StreamReader file = File.OpenText($"{AppDomain.CurrentDomain.BaseDirectory}appsettings.json"))
             {
-                JsonSerializer serializer = new JsonSerializer();
+                var serializer = new JsonSerializer();
                 appSettings = (AppSettings)serializer.Deserialize(file, typeof(AppSettings));
             }
             return appSettings;
