@@ -1,11 +1,14 @@
-﻿using Accounting.Interest.Domain.Commands.CalculateInterest;
+﻿using Accounting.Interest.CrossCutting.Configuration.Extensions;
+using Accounting.Interest.Domain.Commands.CalculateInterest;
 using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
@@ -24,7 +27,14 @@ namespace Accounting.Interest.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => {
+                options.Filters.Add<ValidatorFilter>();
+            })
+                //.AddFluentValidation(fvc =>
+                //   fvc.RegisterValidatorsFromAssemblyContaining<CalculateInterestCommandValidator>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddGlobalExceptionHandlerMiddleware();
 
             ConfigureSwagger(services);
 
@@ -32,7 +42,7 @@ namespace Accounting.Interest.Api
             services.AddMediatR(typeof(ShowMeTheCodeQueryHandler).Assembly);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -48,6 +58,7 @@ namespace Accounting.Interest.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Contabilização de Juros V1");
             });
 
+            app.UseGlobalExceptionHandlerMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
@@ -64,8 +75,6 @@ namespace Accounting.Interest.Api
                     TermsOfService = new Uri("https://example.com/terms")
                 });
                 
-                
-
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);

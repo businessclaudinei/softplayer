@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace Accounting.Interest.Api.Controllers
 {
@@ -39,6 +40,7 @@ namespace Accounting.Interest.Api.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(CalculateInterestCommandResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<CalculateInterestCommandResponse>> CalculateCompoundInterest([FromBody] CalculateInterestCommand command)
         {
