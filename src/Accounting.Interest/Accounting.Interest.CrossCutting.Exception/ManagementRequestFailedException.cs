@@ -1,4 +1,4 @@
-﻿using Accounting.Interest.CrossCutting.Exceptions.Base;
+﻿using Accounting.Interest.CrossCutting.Exception.Base;
 using System.Net;
 
 namespace Accounting.Interest.CrossCutting.Exception

@@ -1,5 +1,5 @@
 ﻿using Accounting.Interest.Domain.Commands.CalculateInterest;
-using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
+using Accounting.Interest.Infrastructure.Data.Query.Queries.ShowMeTheCode;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,7 @@
 ﻿using Accounting.Interest.CrossCutting.Configuration.AppModels;
 using Accounting.Interest.CrossCutting.Configuration.Extensions;
 using Accounting.Interest.Domain.Commands.CalculateInterest;
-using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
+using Accounting.Interest.Infrastructure.Data.Query.Queries.ShowMeTheCode;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

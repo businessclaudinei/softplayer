@@ -2,7 +2,7 @@
 using Management.Interest.Api.Filters;
 using Management.Interest.CrossCutting.Configuration.AppModels;
 using Management.Interest.CrossCutting.Configuration.Extensions;
-using Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate;
+using Management.Interest.Infrastructure.Data.Query.Queries.GetInterestRate;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

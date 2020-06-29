@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Api", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Domain", "Accounting.Interest.Domain\Accounting.Interest.Domain.csproj", "{2672A836-D831-473C-9423-083C5A754BB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Infrastruture.Data.Query", "Accounting.Interest.Infrastruture.Data.Query\Accounting.Interest.Infrastruture.Data.Query.csproj", "{81B2DE68-C57C-43E9-8539-DF646DB4FFC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Infrastructure.Data.Query", "Accounting.Interest.Infrastructure.Data.Query\Accounting.Interest.Infrastructure.Data.Query.csproj", "{81B2DE68-C57C-43E9-8539-DF646DB4FFC5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Infrastruture.Service", "Accounting.Interest.Infrastruture.Service\Accounting.Interest.Infrastruture.Service.csproj", "{49C9516F-C4DD-4E0A-8FD2-F5A53660E4DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Infrastructure.Service", "Accounting.Interest.Infrastructure.Service\Accounting.Interest.Infrastructure.Service.csproj", "{49C9516F-C4DD-4E0A-8FD2-F5A53660E4DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.CrossCutting.Configuration", "Accounting.Interest.CrossCutting.Configuration\Accounting.Interest.CrossCutting.Configuration.csproj", "{54B51FC4-E74F-4B98-9D2E-F5FC33B44B22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.CrossCutting.Exceptions", "Accounting.Interest.CrossCutting.Exception\Accounting.Interest.CrossCutting.Exceptions.csproj", "{B054126C-B044-4D89-BBAA-EA56E5FDBD29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.CrossCutting.Exception", "Accounting.Interest.CrossCutting.Exception\Accounting.Interest.CrossCutting.Exception.csproj", "{B054126C-B044-4D89-BBAA-EA56E5FDBD29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{E909C4FB-0F2D-4688-A70C-EBF058ED9C50}"
 EndProject

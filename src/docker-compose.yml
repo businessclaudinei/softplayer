@@ -1,0 +1,35 @@
+﻿version: "3"
+
+services:
+  management-interest-api:
+    image: management-interest-api
+    build:
+      context: ./Management.Interest
+    ports:
+      - "5000:80"
+    networks:
+      - softplayer-network
+    depends_on:
+      - "redisinterest"
+  
+  accounting-interest-api:
+    image: accounting-interest-api
+    build:
+      context: ./Accounting.Interest
+    ports:
+      - "5001:80"
+    networks:
+      - softplayer-network
+    depends_on:
+      - "redisinterest"
+
+  redisinterest:
+    image: redis:alpine
+    ports:
+      - "16379:6379"
+    networks:
+      - softplayer-network
+
+networks: 
+    softplayer-network:
+        driver: bridge

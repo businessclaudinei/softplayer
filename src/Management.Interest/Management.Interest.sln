@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - CrossCutting", "4 - Cro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{759FAF16-F5F9-4417-A5B6-57B2D7DA727D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Interest.Domain", "Management.Interest.Domain\Management.Interest.Domain.csproj", "{2672A836-D831-473C-9423-083C5A754BB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Interest.Domain", "Management.Interest.Domain\Management.Interest.Domain.csproj", "{2672A836-D831-473C-9423-083C5A754BB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Interest.Infrastruture.Data.Query", "Management.Interest.Infrastruture.Data.Query\Management.Interest.Infrastruture.Data.Query.csproj", "{81B2DE68-C57C-43E9-8539-DF646DB4FFC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Interest.Infrastructure.Data.Query", "Management.Interest.Infrastructure.Data.Query\Management.Interest.Infrastructure.Data.Query.csproj", "{81B2DE68-C57C-43E9-8539-DF646DB4FFC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Interest.Infrastruture.Service", "Management.Interest.Infrastruture.Service\Management.Interest.Infrastruture.Service.csproj", "{49C9516F-C4DD-4E0A-8FD2-F5A53660E4DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Interest.Infrastructure.Service", "Management.Interest.Infrastructure.Service\Management.Interest.Infrastructure.Service.csproj", "{49C9516F-C4DD-4E0A-8FD2-F5A53660E4DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Interest.CrossCutting.Configuration", "Management.Interest.CrossCutting.Configuration\Management.Interest.CrossCutting.Configuration.csproj", "{21CBF636-BDEC-4A2D-981C-F55FC04248BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Interest.CrossCutting.Configuration", "Management.Interest.CrossCutting.Configuration\Management.Interest.CrossCutting.Configuration.csproj", "{21CBF636-BDEC-4A2D-981C-F55FC04248BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Interest.CrossCutting.Exception", "Management.Interest.CrossCutting.Exception\Management.Interest.CrossCutting.Exception.csproj", "{B054126C-B044-4D89-BBAA-EA56E5FDBD28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Interest.CrossCutting.Exception", "Management.Interest.CrossCutting.Exception\Management.Interest.CrossCutting.Exception.csproj", "{B054126C-B044-4D89-BBAA-EA56E5FDBD28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
