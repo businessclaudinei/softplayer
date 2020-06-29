@@ -1,4 +1,5 @@
-﻿using Management.Interest.CrossCutting.Configuration.AppModels;
+﻿using AutoMapper;
+using Management.Interest.CrossCutting.Configuration.AppModels;
 using Management.Interest.CrossCutting.Configuration.ExceptionModels;
 using Management.Interest.CrossCutting.Exception.Base;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -27,10 +29,12 @@ namespace Management.Interest.CrossCutting.Configuration.Extensions
     public class GlobalExceptionHandlerMiddleware : IMiddleware
     {
         private readonly ILogger<GlobalExceptionHandlerMiddleware> _logger;
+        private readonly IMapper _mapper;
 
-        public GlobalExceptionHandlerMiddleware(ILogger<GlobalExceptionHandlerMiddleware> logger)
+        public GlobalExceptionHandlerMiddleware(ILogger<GlobalExceptionHandlerMiddleware> logger, IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -39,28 +43,40 @@ namespace Management.Interest.CrossCutting.Configuration.Extensions
             {
                 try
                 {
-                    await next(context);
-                }
-                catch (BadRequestCustomException badRequestCustomException)
-                {
-                    response.Notification.Message = badRequestCustomException.Message;
-                    response.Notification.ResponseCode = badRequestCustomException.ResponseCode;
-                    response.Notification.InvalidFields = badRequestCustomException.InvalidFields;
-                    await HandleException(response, context);
-                }
-                catch (ApiHttpCustomException apiHttpCustomException)
-                {
-                    response.Notification.Message = apiHttpCustomException.Message;
-                    response.Notification.ResponseCode = apiHttpCustomException.ResponseCode;
-                    response.Notification.Details = apiHttpCustomException;
-                    await HandleException(response, context);
+                    try
+                    {
+                        await next(context);
+                    }
+                    catch (BadRequestCustomException badRequestCustomException)
+                    {
+                        response.Notification = _mapper.Map<BadRequestCustomException, DefaultExceptionResponse.NotificationObject>(badRequestCustomException);
+                        await HandleException(response, context);
+                    }
+                    catch (ApiHttpCustomException apiHttpCustomException)
+                    {
+                        response.Notification = _mapper.Map<ApiHttpCustomException, DefaultExceptionResponse.NotificationObject>(apiHttpCustomException);
+                        await HandleException(response, context);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        response.Notification = _mapper.Map<System.Exception, DefaultExceptionResponse.NotificationObject>(ex);
+                        await HandleException(response, context);
+                    }
                 }
                 catch (System.Exception ex)
                 {
-                    response.Notification.Message = ex.Message;
-                    response.Notification.ResponseCode = HttpStatusCode.InternalServerError;
-                    response.Notification.Details = ex;
-                    await HandleException(response, context);
+                    var jsonError = $@"{{
+                                        ""data"": null,
+                                        ""notification"": {{
+                                           ""responseCode"": 500,
+                                           ""message"": ""Um erro fatal aconteceu. Erro: {ex.Message.Replace("\r", "").Replace("\n", "")}"",
+                                           ""details"": ""{ ex.StackTrace}""
+                                          }}
+                                       }}";
+                    Console.WriteLine(jsonError);
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync(jsonError);
                 }
             }
         }
