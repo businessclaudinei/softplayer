@@ -21,8 +21,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Accounting.Interest.CrossCutting.Configuration\Accounting.Interest.CrossCutting.Configuration.csproj" />
     <ProjectReference Include="..\Accounting.Interest.Domain\Accounting.Interest.Domain.csproj" />
-    <ProjectReference Include="..\Accounting.Interest.Infrastruture.Data.Query\Accounting.Interest.Infrastruture.Data.Query.csproj" />
-    <ProjectReference Include="..\Accounting.Interest.Infrastruture.Service\Accounting.Interest.Infrastruture.Service.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastructure.Data.Query\Accounting.Interest.Infrastructure.Data.Query.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastructure.Service\Accounting.Interest.Infrastructure.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
-namespace Accounting.Interest.CrossCutting.Exceptions.Base
+namespace Accounting.Interest.CrossCutting.Exception.Base
 {
     [ExcludeFromCodeCoverage]
     [Serializable]

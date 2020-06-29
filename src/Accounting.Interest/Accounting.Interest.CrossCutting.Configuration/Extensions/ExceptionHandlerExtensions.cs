@@ -1,7 +1,6 @@
 ﻿using Accounting.Interest.CrossCutting.Configuration.AppModels;
 using Accounting.Interest.CrossCutting.Configuration.ExceptionModels;
 using Accounting.Interest.CrossCutting.Exception.Base;
-using Accounting.Interest.CrossCutting.Exceptions.Base;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Management.Interest.CrossCutting.Configuration.ExceptionModels;
-using Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Management.Interest.Infrastructure.Data.Query.Queries.GetInterestRate;
+using Management.Interest.CrossCutting.Configuration.ExceptionModels;
 
 namespace Management.Interest.Controllers
 {

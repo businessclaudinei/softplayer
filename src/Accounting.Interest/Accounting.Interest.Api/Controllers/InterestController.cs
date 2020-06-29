@@ -1,7 +1,7 @@
 ﻿using Accounting.Interest.CrossCutting.Configuration.ExceptionModels;
 using Accounting.Interest.Domain.Commands.CalculateInterest;
-using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
 using AutoMapper;
+using Accounting.Interest.Infrastructure.Data.Query.Queries.ShowMeTheCode;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.2\Management.Interest.Infrastruture.Data.Query\Management.Interest.Infrastruture.Data.Query.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Management.Interest.Infrastructure.Data.Query\Management.Interest.Infrastructure.Data.Query.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Management.Interest.CrossCutting.Configuration\Management.Interest.CrossCutting.Configuration.csproj" />
-    <ProjectReference Include="..\Management.Interest.Infrastruture.Service\Management.Interest.Infrastruture.Service.csproj" />
+    <ProjectReference Include="..\Management.Interest.Infrastructure.Service\Management.Interest.Infrastructure.Service.csproj" />
   </ItemGroup>
 
 </Project>

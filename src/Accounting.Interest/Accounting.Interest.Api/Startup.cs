@@ -2,8 +2,8 @@
 using Accounting.Interest.CrossCutting.Configuration.Extensions;
 using Accounting.Interest.CrossCutting.Configuration.Mapper;
 using Accounting.Interest.Domain.Commands.CalculateInterest;
+using Accounting.Interest.Infrastructure.Data.Query.Queries.ShowMeTheCode;
 using Accounting.Interest.Infrastruture.Service.Resources.Cache;
-using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;

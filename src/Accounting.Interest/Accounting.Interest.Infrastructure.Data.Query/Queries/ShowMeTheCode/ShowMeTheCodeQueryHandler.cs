@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode
+namespace Accounting.Interest.Infrastructure.Data.Query.Queries.ShowMeTheCode
 {
     public class ShowMeTheCodeQueryHandler : IRequestHandler<ShowMeTheCodeQuery, ShowMeTheCodeQueryResponse>
     {

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Accounting.Interest.CrossCutting.Exception\Accounting.Interest.CrossCutting.Exceptions.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.CrossCutting.Exception\Accounting.Interest.CrossCutting.Exception.csproj" />
   </ItemGroup>
 
 </Project>

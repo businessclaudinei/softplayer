@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Accounting.Interest.CrossCutting.Configuration\Accounting.Interest.CrossCutting.Configuration.csproj" />
-    <ProjectReference Include="..\Accounting.Interest.Infrastruture.Service\Accounting.Interest.Infrastruture.Service.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastructure.Service\Accounting.Interest.Infrastructure.Service.csproj" />
   </ItemGroup>
 
 </Project>
