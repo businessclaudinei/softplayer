@@ -16,7 +16,6 @@ public class ValidatorFilter : IAsyncActionFilter
                 FieldName = e.Key,
                 Message = m.ErrorMessage
             }));
-            //context.Result = new BadRequestObjectResult();
             throw new BadRequestCustomException(errorsInState, "A entrada de dados da requisição está incorreta.");
         }
         await next();

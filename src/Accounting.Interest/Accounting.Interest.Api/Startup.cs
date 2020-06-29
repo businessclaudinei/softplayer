@@ -2,6 +2,7 @@
 using Accounting.Interest.CrossCutting.Configuration.Extensions;
 using Accounting.Interest.CrossCutting.Configuration.Mapper;
 using Accounting.Interest.Domain.Commands.CalculateInterest;
+using Accounting.Interest.Infrastruture.Service.Resources.Cache;
 using Accounting.Interest.Insfrastruture.Data.Query.Queries.ShowMeTheCode;
 using AutoMapper;
 using FluentValidation.AspNetCore;
@@ -51,6 +52,8 @@ namespace Accounting.Interest.Api
             services.AddAutoMapper();
             services.AddMediatR(typeof(CalculateInterestCommandHandler).Assembly);
             services.AddMediatR(typeof(ShowMeTheCodeQueryHandler).Assembly);
+
+            ConfigureRedis(services);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -74,6 +77,22 @@ namespace Accounting.Interest.Api
             app.UseGlobalExceptionHandlerMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private void ConfigureRedis(IServiceCollection services)
+        {
+            var redisCacheSettings = AppSettings.Settings.RedisCache;
+            services.AddSingleton(redisCacheSettings);
+
+            if (!redisCacheSettings.Enabled)
+                return;
+
+            var redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(redisConnectionString))
+                redisConnectionString = redisCacheSettings.ConnectionString;
+
+            services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
         }
 
         private RequestLocalizationOptions SetUpLocalization()
