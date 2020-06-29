@@ -3,6 +3,7 @@ using Management.Interest.Api.Filters;
 using Management.Interest.CrossCutting.Configuration.AppModels;
 using Management.Interest.CrossCutting.Configuration.Extensions;
 using Management.Interest.Infrastruture.Data.Query.Queries.GetInterestRate;
+using Management.Interest.Infrastruture.Service.Resources.Cache;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,7 @@ namespace Management.Interest
             ConfigureSwagger(services);
 
             services.AddMediatR(typeof(GetInterestRateQueryHandler).Assembly);
+            ConfigureRedis(services);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -65,6 +67,22 @@ namespace Management.Interest
             app.UseGlobalExceptionHandlerMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private void ConfigureRedis(IServiceCollection services)
+        {
+            var redisCacheSettings = AppSettings.Settings.RedisCache;
+            services.AddSingleton(redisCacheSettings);
+
+            if (!redisCacheSettings.Enabled)
+                return;
+
+            var redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(redisConnectionString))
+                redisConnectionString = redisCacheSettings.ConnectionString;
+
+            services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
         }
 
         private RequestLocalizationOptions SetUpLocalization()

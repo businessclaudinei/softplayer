@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Accounting.Interest.CrossCutting.Configuration\Accounting.Interest.CrossCutting.Configuration.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastruture.Service\Accounting.Interest.Infrastruture.Service.csproj" />
   </ItemGroup>
 
 </Project>
