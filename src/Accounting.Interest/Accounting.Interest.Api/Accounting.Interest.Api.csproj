@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -22,6 +22,7 @@
     <ProjectReference Include="..\Accounting.Interest.CrossCutting.Configuration\Accounting.Interest.CrossCutting.Configuration.csproj" />
     <ProjectReference Include="..\Accounting.Interest.Domain\Accounting.Interest.Domain.csproj" />
     <ProjectReference Include="..\Accounting.Interest.Infrastructure.Data.Query\Accounting.Interest.Infrastructure.Data.Query.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastruture.Service\Accounting.Interest.Infrastruture.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

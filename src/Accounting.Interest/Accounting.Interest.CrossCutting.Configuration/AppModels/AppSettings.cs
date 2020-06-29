@@ -24,5 +24,8 @@ namespace Accounting.Interest.CrossCutting.Configuration.AppModels
 
         [JsonProperty("appLocale")]
         public string AppLocale { get; set; }
+
+        [JsonProperty("redisCacheSettings")]
+        public RedisCacheSettings RedisCache { get; set; }
     }
 }

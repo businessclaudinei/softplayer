@@ -1,8 +1,11 @@
-﻿using FluentValidation.AspNetCore;
+﻿using AutoMapper;
+using FluentValidation.AspNetCore;
 using Management.Interest.Api.Filters;
 using Management.Interest.CrossCutting.Configuration.AppModels;
 using Management.Interest.CrossCutting.Configuration.Extensions;
 using Management.Interest.Infrastructure.Data.Query.Queries.GetInterestRate;
+using Management.Interest.CrossCutting.Configuration.Mapper;
+using Management.Interest.Infrastruture.Service.Resources.Cache;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,11 +39,18 @@ namespace Management.Interest
                   fvc.RegisterValidatorsFromAssemblyContaining<GetInterestRateQueryValidator>())
                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.AddGlobalExceptionHandlerMiddleware();
 
             ConfigureSwagger(services);
 
+            services.AddAutoMapper();
             services.AddMediatR(typeof(GetInterestRateQueryHandler).Assembly);
+            ConfigureRedis(services);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -65,6 +75,22 @@ namespace Management.Interest
             app.UseGlobalExceptionHandlerMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private void ConfigureRedis(IServiceCollection services)
+        {
+            var redisCacheSettings = AppSettings.Settings.RedisCache;
+            services.AddSingleton(redisCacheSettings);
+
+            if (!redisCacheSettings.Enabled)
+                return;
+
+            var redisConnectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(redisConnectionString))
+                redisConnectionString = redisCacheSettings.ConnectionString;
+
+            services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
         }
 
         private RequestLocalizationOptions SetUpLocalization()
@@ -98,6 +124,31 @@ namespace Management.Interest
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
             });
+        }
+    }
+
+    public static class CustomMvcServiceCollectionExtensions
+    {
+        public static void AddAutoMapper(this IServiceCollection services)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+            var config = new AutoMapperConfiguration().Configure();
+            services.AddSingleton(sp => config.CreateMapper());
+        }
+    }
+
+    public class AutoMapperConfiguration
+    {
+        public MapperConfiguration Configure()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<ExceptionProfile>();
+            });
+            return config;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
@@ -14,7 +15,7 @@ namespace Management.Interest.Controllers
     {
         private readonly IMediator _mediator;
 
-        public InterestController(IMediator mediator)
+        public InterestController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
         }
@@ -26,7 +27,6 @@ namespace Management.Interest.Controllers
         /// <p>
         /// <b>Descricao: </b><br />
         /// Este método é responsável por obter a taxa de juros. A resposta deste método contém a taxa de juros.<br />
-        /// Nota, o parametro id e obrigatorio. <br />
         /// </p>
         /// <br />
         /// <p>

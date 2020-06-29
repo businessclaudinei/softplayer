@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Management.Interest.Domain\Management.Interest.Domain.csproj" />
+    <ProjectReference Include="..\Management.Interest.Infrastruture.Service\Management.Interest.Infrastruture.Service.csproj" />
     <ProjectReference Include="..\Management.Interest.Infrastructure.Data.Query\Management.Interest.Infrastructure.Data.Query.csproj" />
   </ItemGroup>
 
