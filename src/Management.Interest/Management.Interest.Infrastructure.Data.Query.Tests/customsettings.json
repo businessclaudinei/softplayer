@@ -1,0 +1,9 @@
+{
+  "interest": {
+    "cache": {
+      "key": "interestRate",
+      "timeToLive": 15
+    },
+    "defaultRate": 0.01
+  }
+}
