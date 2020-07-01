@@ -92,7 +92,7 @@ namespace Accounting.Interest.Api
                 redisConnectionString = redisCacheSettings.ConnectionString;
 
             services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
-            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+            services.AddSingleton<ICacheService, CacheService>();
         }
 
         private RequestLocalizationOptions SetUpLocalization()

@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CustomModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Accounting.Interest.CrossCutting.Exception\Accounting.Interest.CrossCutting.Exception.csproj" />
   </ItemGroup>
 

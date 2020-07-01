@@ -1,0 +1,9 @@
+{
+  "interest": {
+    "cache": {
+      "key": "compoundInterest",
+      "timeToLive": 15
+    }
+  },
+  "gitHubRepositoryUrl": "https://github.com/businessclaudinei/softplayer"
+}

@@ -3,8 +3,8 @@ using FluentValidation.AspNetCore;
 using Management.Interest.Api.Filters;
 using Management.Interest.CrossCutting.Configuration.AppModels;
 using Management.Interest.CrossCutting.Configuration.Extensions;
-using Management.Interest.Infrastructure.Data.Query.Queries.GetInterestRate;
 using Management.Interest.CrossCutting.Configuration.Mapper;
+using Management.Interest.Infrastructure.Data.Query.Queries.v1.GetInterestRate;
 using Management.Interest.Infrastruture.Service.Resources.Cache;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -90,7 +90,7 @@ namespace Management.Interest
                 redisConnectionString = redisCacheSettings.ConnectionString;
 
             services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
-            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+            services.AddSingleton<ICacheService, CacheService>();
         }
 
         private RequestLocalizationOptions SetUpLocalization()
