@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="customsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="customsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.12.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="nunit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Accounting.Interest.CrossCutting.Configuration\Accounting.Interest.CrossCutting.Configuration.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastructure.Data.Query\Accounting.Interest.Infrastructure.Data.Query.csproj" />
+    <ProjectReference Include="..\Accounting.Interest.Infrastructure.Service\Accounting.Interest.Infrastructure.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Unit\Queries\v1\ShowMeTheCode\Mocks\" />
+  </ItemGroup>
+
+</Project>

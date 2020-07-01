@@ -1,6 +1,7 @@
-﻿using Accounting.Interest.Infrastruture.Service.Resources.Cache;
+﻿using Accounting.Interest.CrossCutting.Configuration.CustomModels;
+using Accounting.Interest.CrossCutting.Configuration.Extensions;
+using Accounting.Interest.Infrastruture.Service.Resources.Cache;
 using MediatR;
-using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,30 +10,33 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
 {
     public class CalculateInterestCommandHandler : IRequestHandler<CalculateInterestCommand, CalculateInterestCommandResponse>
     {
-        private readonly IResponseCacheService _responseCacheService;
+        private readonly ICacheService _cacheService;
 
-        public CalculateInterestCommandHandler(IResponseCacheService responseCacheService)
+        public CalculateInterestCommandHandler(ICacheService cacheService)
         {
-            _responseCacheService = responseCacheService;
+            _cacheService = cacheService;
         }
 
         public async Task<CalculateInterestCommandResponse> Handle(CalculateInterestCommand command, CancellationToken cancellation)
         {
-            decimal compoundInterestAmount = 0;
+            var compoundInterestAmount = command.Principal * (Math.Pow(1 + GetInterestRate(), command.TimeInMonths));
 
-            var cachedValue = await _responseCacheService.GetCachedResponseAsync("test");
+            return new CalculateInterestCommandResponse { CompoundInterestAmount = compoundInterestAmount.Truncate(2) };
+        }
 
-            if (cachedValue != null)
+        private double GetInterestRate()
+        {
+            double? interestRate = 0.01;//await _cacheService.GetCachedResponseAsync<double?>(CustomSettings.Settings.Interest.Cache.Key);
+
+            if (!interestRate.HasValue)
             {
-                compoundInterestAmount = JsonConvert.DeserializeObject<decimal>(cachedValue);
-                await _responseCacheService.CacheResponseAsync("test", compoundInterestAmount+1, new TimeSpan(0, 0, 20)).ConfigureAwait(false);
-            }
-            else
-            {
-                await _responseCacheService.CacheResponseAsync("test", 1, new TimeSpan(0, 0, 20)).ConfigureAwait(false);
+                interestRate = 0.01; //call service;
+
+                var timeToLive = new TimeSpan(0, CustomSettings.Settings.Interest.Cache.TimeToLive, 0);
+                _cacheService.CacheResponseAsync(CustomSettings.Settings.Interest.Cache.Key, interestRate, timeToLive);
             }
 
-            return new CalculateInterestCommandResponse { CompoundInterestAmount = compoundInterestAmount };
+            return interestRate.Value;
         }
     }
 }

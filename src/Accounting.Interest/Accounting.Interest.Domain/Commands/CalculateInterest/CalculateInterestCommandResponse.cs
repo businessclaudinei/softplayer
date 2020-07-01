@@ -9,12 +9,12 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
         /// Valor do juros composto
         /// </summary>
         [JsonProperty("compoundInterestAmount")]
-        public decimal CompoundInterestAmount { get; set; }
+        public double CompoundInterestAmount { get; set; }
 
         /// <summary>
         /// Valor do juros composto formatado
         /// </summary>
         [JsonProperty("formattedCompoundInterestAmount")]
-        public string FormattedCompoundInterestAmount { get; set; }
+        public string FormattedCompoundInterestAmount { get { return CompoundInterestAmount.ToString("c"); } }
     }
 }

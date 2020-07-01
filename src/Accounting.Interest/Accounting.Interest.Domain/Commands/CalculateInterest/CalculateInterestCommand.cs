@@ -11,6 +11,6 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
         public int TimeInMonths { get; set; }
 
         [JsonProperty("principal")]
-        public decimal Principal { get; set; }
+        public double Principal { get; set; }
     }
 }

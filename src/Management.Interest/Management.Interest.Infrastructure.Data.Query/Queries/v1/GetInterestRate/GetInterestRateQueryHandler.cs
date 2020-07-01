@@ -21,14 +21,13 @@ namespace Management.Interest.Infrastructure.Data.Query.Queries.v1.GetInterestRa
 
         public async Task<GetInterestRateQueryResponse> Handle(GetInterestRateQuery query, CancellationToken cancellation)
         {
-            var timeToLive = new TimeSpan(0, CustomSettings.Settings.Interest.Cache.TimeToLive, 0);
-
             var interestRate = await _cacheService.GetCachedResponseAsync<decimal?>(CustomSettings.Settings.Interest.Cache.Key);
 
             if (!interestRate.HasValue)
             {
                 interestRate = CustomSettings.Settings.Interest.DefaultRate;
 
+                var timeToLive = new TimeSpan(0, CustomSettings.Settings.Interest.Cache.TimeToLive, 0);
                 _cacheService.CacheResponseAsync(CustomSettings.Settings.Interest.Cache.Key, interestRate, timeToLive);
             }
             return _mapper.Map<decimal?, GetInterestRateQueryResponse>(interestRate);
