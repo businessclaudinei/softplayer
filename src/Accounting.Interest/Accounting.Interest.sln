@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{E909C4FB-0F2D-4688-A70C-EBF058ED9C50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{0F840200-DC72-422F-823F-AA0FC2A323A0}"
+	ProjectSection(SolutionItems) = preProject
+		Accounting.Interest.Api\Program.cs = Accounting.Interest.Api\Program.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infrastructure", "3 - Infrastructure", "{1A9679FF-98C3-4174-99E4-708DD5EDF6F0}"
 EndProject
@@ -25,9 +28,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - CrossCutting", "4 - Cro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{8AFE2767-1ACD-4F9D-9369-8BA4A55E7558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting.Interest.Infrastructure.Data.Query.Test", "Accounting.Interest.Infrastructure.Data.Query.Test\Accounting.Interest.Infrastructure.Data.Query.Test.csproj", "{499D4D74-3AE0-4902-82C0-C78CC8F9EF14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Infrastructure.Data.Query.Test", "Accounting.Interest.Infrastructure.Data.Query.Test\Accounting.Interest.Infrastructure.Data.Query.Test.csproj", "{499D4D74-3AE0-4902-82C0-C78CC8F9EF14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting.Interest.Domain.Test", "Accounting.Interest.Domain.Test\Accounting.Interest.Domain.Test.csproj", "{9BD05330-D58C-4C3D-B858-AA45F77D0018}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Interest.Domain.Test", "Accounting.Interest.Domain.Test\Accounting.Interest.Domain.Test.csproj", "{9BD05330-D58C-4C3D-B858-AA45F77D0018}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿using Accounting.Interest.Infrastruture.Service.Resources.Cache;
+﻿using System;
+using Accounting.Interest.Infrastructure.Service.Resources.Cache;
 using NSubstitute;
 
 namespace Accounting.Interest.Domain.Test.Unit.Commands.v1.CalculateInterest.Mocks.Cache
@@ -9,7 +10,7 @@ namespace Accounting.Interest.Domain.Test.Unit.Commands.v1.CalculateInterest.Moc
         {
             var mock = Substitute.For<ICacheService>();
 
-            
+            mock.CacheResponseAsync(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<TimeSpan>());
 
             return mock;
         }

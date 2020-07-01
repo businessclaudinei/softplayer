@@ -18,6 +18,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using Management.Interest.Infrastructure.Data.Query.v1.Mappers;
 
 namespace Management.Interest
 {
@@ -147,6 +148,7 @@ namespace Management.Interest
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<ExceptionProfile>();
+                cfg.AddProfile<GetInterestRateProfile>();
             });
             return config;
         }

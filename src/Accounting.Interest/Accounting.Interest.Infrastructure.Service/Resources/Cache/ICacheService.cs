@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Accounting.Interest.Infrastruture.Service.Resources.Cache
+namespace Accounting.Interest.Infrastructure.Service.Resources.Cache
 {
     public interface ICacheService
     {

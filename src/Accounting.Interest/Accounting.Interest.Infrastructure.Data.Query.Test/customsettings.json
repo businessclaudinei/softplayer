@@ -1,7 +1,7 @@
 {
   "interest": {
     "cache": {
-      "key": "compoundInterest",
+      "key": "compoundInterestRate",
       "timeToLive": 15
     }
   },

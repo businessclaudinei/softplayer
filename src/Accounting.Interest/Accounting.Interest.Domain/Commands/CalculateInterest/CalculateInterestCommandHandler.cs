@@ -1,6 +1,7 @@
 ﻿using Accounting.Interest.CrossCutting.Configuration.CustomModels;
 using Accounting.Interest.CrossCutting.Configuration.Extensions;
-using Accounting.Interest.Infrastruture.Service.Resources.Cache;
+using Accounting.Interest.Infrastructure.Service.Interfaces.Management;
+using Accounting.Interest.Infrastructure.Service.Resources.Cache;
 using MediatR;
 using System;
 using System.Threading;
@@ -11,32 +12,34 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
     public class CalculateInterestCommandHandler : IRequestHandler<CalculateInterestCommand, CalculateInterestCommandResponse>
     {
         private readonly ICacheService _cacheService;
+        private readonly IManagementInterestApiServiceClient _managementInterestApiServiceClient;
 
-        public CalculateInterestCommandHandler(ICacheService cacheService)
+        public CalculateInterestCommandHandler(ICacheService cacheService,
+            IManagementInterestApiServiceClient managementInterestApiServiceClient)
         {
             _cacheService = cacheService;
+            _managementInterestApiServiceClient = managementInterestApiServiceClient;
         }
 
         public async Task<CalculateInterestCommandResponse> Handle(CalculateInterestCommand command, CancellationToken cancellation)
         {
-            var compoundInterestAmount = command.Principal * (Math.Pow(1 + GetInterestRate(), command.TimeInMonths));
+            var interestRateServiceResponse = await _managementInterestApiServiceClient.GetInterestRate();
 
-            return new CalculateInterestCommandResponse { CompoundInterestAmount = compoundInterestAmount.Truncate(2) };
+            var compoundInterestAmount = command.Principal * Math.Pow(1 + interestRateServiceResponse.InterestRate, command.TimeInMonths);
+
+            compoundInterestAmount = compoundInterestAmount.Truncate(2);
+
+            Task.Run(() => SetCalculatedValuesHistory(command, interestRateServiceResponse.InterestRate, compoundInterestAmount));
+
+            return new CalculateInterestCommandResponse { CompoundInterestAmount = compoundInterestAmount };
         }
 
-        private double GetInterestRate()
+        private async Task SetCalculatedValuesHistory(CalculateInterestCommand command, double interestRate, double compoundInterestAmount)
         {
-            double? interestRate = 0.01;//await _cacheService.GetCachedResponseAsync<double?>(CustomSettings.Settings.Interest.Cache.Key);
+            var calculateResult = $"{command.Principal} x (1 + {interestRate}) ^ {command.TimeInMonths} = {compoundInterestAmount}";
 
-            if (!interestRate.HasValue)
-            {
-                interestRate = 0.01; //call service;
-
-                var timeToLive = new TimeSpan(0, CustomSettings.Settings.Interest.Cache.TimeToLive, 0);
-                _cacheService.CacheResponseAsync(CustomSettings.Settings.Interest.Cache.Key, interestRate, timeToLive);
-            }
-
-            return interestRate.Value;
+            var timeToLive = new TimeSpan(0, CustomSettings.Settings.Interest.Cache.TimeToLive, 0);
+            await _cacheService.CacheResponseAsync(CustomSettings.Settings.Interest.Cache.Key, calculateResult, timeToLive);
         }
     }
 }

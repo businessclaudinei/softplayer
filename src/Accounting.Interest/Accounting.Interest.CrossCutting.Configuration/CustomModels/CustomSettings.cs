@@ -24,5 +24,8 @@ namespace Accounting.Interest.CrossCutting.Configuration.CustomModels
 
         [JsonProperty("gitHubRepositoryUrl")]
         public string GitHubRepositoryUrl { get; set; }
+
+        [JsonProperty("urlRegex")]
+        public string UrlRegex => @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$";
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.InteropServices;
+using Accounting.Interest.CrossCutting.Exception.Base;
 
 namespace Accounting.Interest.CrossCutting.Configuration.ExceptionModels
 {

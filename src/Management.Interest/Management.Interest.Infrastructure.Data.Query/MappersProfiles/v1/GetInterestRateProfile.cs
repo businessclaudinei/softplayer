@@ -7,7 +7,7 @@ namespace Management.Interest.Infrastructure.Data.Query.v1.Mappers
     {
         public GetInterestRateProfile()
         {
-            CreateMap<decimal?, GetInterestRateQueryResponse>(MemberList.None)
+            CreateMap<double?, GetInterestRateQueryResponse>(MemberList.None)
                 .ForMember(x => x.InterestRate, opt => opt.MapFrom(src => src.Value))
                 .ForMember(x => x.FormattedInterestRate, opt => opt.MapFrom(src => src.Value.ToString("c")));
         }
