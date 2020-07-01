@@ -14,6 +14,6 @@ namespace Management.Interest.CrossCutting.Configuration.CustomModels
         /// The default interest rate amount
         /// </summary>
         [JsonProperty("defaultRate")]
-        public decimal DefaultRate { get; set; }
+        public double DefaultRate { get; set; }
     }
 }

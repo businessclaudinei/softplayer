@@ -16,7 +16,7 @@ namespace Accounting.Interest.Api.Controllers
     {
         private readonly IMediator _mediator;
 
-        public InterestController(IMediator mediator, IMapper mapper)
+        public InterestController(IMediator mediator)
         {
             _mediator = mediator;
         }

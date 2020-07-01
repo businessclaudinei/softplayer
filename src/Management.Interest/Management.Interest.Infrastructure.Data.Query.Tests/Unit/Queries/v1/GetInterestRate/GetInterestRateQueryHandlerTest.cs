@@ -22,11 +22,6 @@ namespace Management.Interest.Infrastructure.Data.Query.Tests.Unit.Queries.v1.Ge
             _defaultContext = new GetInterestRateQueryHandler(_cacheMock.GetMock(), _mapperMock.GetMock());
         }
 
-        private void TestCleanup()
-        {
-
-        }
-
         [Test, Property("Priority", 1)]
         public async Task Should_GetInterestRate_ForValidRequest()
         {

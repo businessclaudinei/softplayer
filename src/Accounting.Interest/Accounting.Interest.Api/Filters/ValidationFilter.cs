@@ -1,24 +1,26 @@
-﻿using Accounting.Interest.CrossCutting.Exception;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Accounting.Interest.CrossCutting.Exception.Base;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Linq;
-using System.Threading.Tasks;
 
-public class ValidatorFilter : IAsyncActionFilter
+namespace Accounting.Interest.Api.Filters
 {
-    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+    public class ValidatorFilter : IAsyncActionFilter
     {
-        if (!context.ModelState.IsValid)
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var errorsInState = context.ModelState.Where(v => v.Value.Errors.Any())
-            .SelectMany(e => e.Value.Errors.Select(m => new ErrorModel
+            if (!context.ModelState.IsValid)
             {
-                FieldName = e.Key,
-                Message = m.ErrorMessage
-            }));
-            throw new BadRequestCustomException(errorsInState, "A entrada de dados da requisição está incorreta.");
+                var errorsInState = context.ModelState.Where(v => v.Value.Errors.Any())
+                    .SelectMany(e => e.Value.Errors.Select(m => new ErrorModel
+                    {
+                        FieldName = e.Key,
+                        Message = m.ErrorMessage
+                    }));
+                throw new BadRequestCustomException(errorsInState, "A entrada de dados da requisição está incorreta.");
+            }
+            await next();
         }
-        await next();
-    }
 
+    }
 }

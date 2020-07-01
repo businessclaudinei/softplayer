@@ -1,10 +1,10 @@
-﻿using Accounting.Interest.CrossCutting.Exception;
+﻿using System;
+using System.Threading.Tasks;
+using Accounting.Interest.CrossCutting.Exception;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using System;
-using System.Threading.Tasks;
 
-namespace Accounting.Interest.Infrastruture.Service.Resources.Cache
+namespace Accounting.Interest.Infrastructure.Service.Resources.Cache
 {
     public class CacheService : ICacheService
     {

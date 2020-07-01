@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Accounting.Interest.Domain.Test.Unit.Commands.v1.CalculateInterest.Mocks.Service;
 
 namespace Accounting.Interest.Domain.Test.Unit.Commands.v1.CalculateInterest
 {
@@ -14,6 +15,7 @@ namespace Accounting.Interest.Domain.Test.Unit.Commands.v1.CalculateInterest
     public sealed class CalculateInterestCommandHandlerTest
     {
         private CalculateInterestCommandHandler _defaultContext;
+        private ManagementInterestApiServiceClientMock _managementInterestApiServiceClientMock;
         private CacheMock _cacheMock;
         private Fixture _fixture;
 
@@ -22,7 +24,8 @@ namespace Accounting.Interest.Domain.Test.Unit.Commands.v1.CalculateInterest
         {
             _fixture = new Fixture();
             _cacheMock = new CacheMock();
-            _defaultContext = new CalculateInterestCommandHandler(_cacheMock.GetCachedMock());
+            _managementInterestApiServiceClientMock = new ManagementInterestApiServiceClientMock();
+            _defaultContext = new CalculateInterestCommandHandler(_cacheMock.GetCachedMock(), _managementInterestApiServiceClientMock.GetMock());
         }
 
         [TestCase(5,100)]

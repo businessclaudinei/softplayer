@@ -1,4 +1,4 @@
-﻿namespace Accounting.Interest.CrossCutting.Exception
+﻿namespace Accounting.Interest.CrossCutting.Exception.Base
 {
     public class ErrorModel
     {

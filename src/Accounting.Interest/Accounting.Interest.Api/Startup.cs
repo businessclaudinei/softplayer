@@ -1,9 +1,12 @@
-﻿using Accounting.Interest.CrossCutting.Configuration.AppModels;
+﻿using Accounting.Interest.Api.Filters;
+using Accounting.Interest.CrossCutting.Configuration.AppModels;
 using Accounting.Interest.CrossCutting.Configuration.Extensions;
 using Accounting.Interest.CrossCutting.Configuration.Mapper;
 using Accounting.Interest.Domain.Commands.CalculateInterest;
 using Accounting.Interest.Infrastructure.Data.Query.Queries.ShowMeTheCode;
-using Accounting.Interest.Infrastruture.Service.Resources.Cache;
+using Accounting.Interest.Infrastructure.Service.Interfaces.Management;
+using Accounting.Interest.Infrastructure.Service.Resources.Cache;
+using Accounting.Interest.Infrastructure.Service.ServiceHandler.Management;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -15,17 +18,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SimpleInjector;
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+
 
 namespace Accounting.Interest.Api
 {
     public class Startup
     {
+        private Container container = new Container();
+
         public Startup(IConfiguration configuration)
         {
+            container.Options.ResolveUnregisteredConcreteTypes = false;
+
             Configuration = configuration;
         }
 
@@ -53,11 +63,24 @@ namespace Accounting.Interest.Api
             services.AddMediatR(typeof(CalculateInterestCommandHandler).Assembly);
             services.AddMediatR(typeof(ShowMeTheCodeQueryHandler).Assembly);
 
+            services.AddHttpClient();
+
             ConfigureRedis(services);
+
+            services.AddSimpleInjector(container, options =>
+            {
+                options.AddAspNetCore().AddControllerActivation();
+                options.AddLogging();
+            });
+            services.UseSimpleInjectorAspNetRequestScoping(container);
+
+            InitializeContainer();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseSimpleInjector(container);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -76,7 +99,10 @@ namespace Accounting.Interest.Api
 
             app.UseGlobalExceptionHandlerMiddleware();
             app.UseHttpsRedirection();
+
             app.UseMvc();
+
+            container.Verify();
         }
 
         private void ConfigureRedis(IServiceCollection services)
@@ -126,6 +152,18 @@ namespace Accounting.Interest.Api
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
             });
+        }
+
+        private void InitializeContainer()
+        {
+            container.RegisterSingleton<IMediator, Mediator>();
+            container.Register((Func<ServiceFactory>) (() => container.GetInstance), Lifestyle.Singleton);
+            container.Collection.Register(typeof(IPipelineBehavior<,>), Enumerable.Empty<Type>());
+            container.Register(typeof(IRequestHandler<,>), typeof(CalculateInterestCommandHandler).Assembly);
+            container.Register(typeof(IRequestHandler<,>), typeof(ShowMeTheCodeQueryHandler).Assembly);
+            container.Register<IManagementInterestApiServiceClient, ManagementInterestApiServiceClient>(Lifestyle.Singleton);
+            container.Register<ICacheService, CacheService>(Lifestyle.Singleton);
+            container.RegisterSingleton(typeof(ILogger<>), typeof(Logger<>));
         }
     }
 

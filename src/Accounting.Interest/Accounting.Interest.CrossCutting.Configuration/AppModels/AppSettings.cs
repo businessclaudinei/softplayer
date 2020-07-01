@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Accounting.Interest.CrossCutting.Configuration.AppModels
@@ -27,5 +28,8 @@ namespace Accounting.Interest.CrossCutting.Configuration.AppModels
 
         [JsonProperty("redisCacheSettings")]
         public RedisCacheSettings RedisCache { get; set; }
+
+        [JsonProperty("serviceClients")]
+        public IDictionary<string, ServiceClientSettings> ServiceClients { get; set; }
     }
 }
