@@ -16,7 +16,7 @@
 
 ## **Guidelines**
 
-Este documento provê um tutorial e os endpoints para a Management.Interest.Api v1.
+Este documento provê um tutorial de instalação e os endpoints das Apis.
 
 ## **Instalação**
 #### Modo debug
