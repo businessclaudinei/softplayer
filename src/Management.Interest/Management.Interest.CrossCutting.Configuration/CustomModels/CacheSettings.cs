@@ -15,5 +15,11 @@ namespace Management.Interest.CrossCutting.Configuration.CustomModels
         /// </summary>
         [JsonProperty("timeToLive")]
         public int TimeToLive { get; set; }
+
+        /// <summary>
+        /// The default currency code of interest amount
+        /// </summary>
+        [JsonProperty("defaultCurrencyCode")]
+        public string DefaultCurrencyCode { get; set; }
     }
 }

@@ -2,7 +2,8 @@
   "interest": {
     "cache": {
       "key": "interestRate",
-      "timeToLive": 15
+      "timeToLive": 15,
+      "defaultCurrencyCode": "BRL" 
     },
     "defaultRate": 0.01
   }

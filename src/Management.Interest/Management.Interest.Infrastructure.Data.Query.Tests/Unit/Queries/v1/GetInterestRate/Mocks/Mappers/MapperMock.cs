@@ -12,9 +12,9 @@ namespace Management.Interest.Infrastructure.Data.Query.Tests.Unit.Queries.v1.Ge
         {
             IMapper mock = Substitute.For<IMapper>();
 
-            mock.Map<decimal?, GetInterestRateQueryResponse>(Arg.Is<decimal?>(interestRate => interestRate.HasValue)).Returns(GetInterestRateResponseSpecimen.For.ValidRequest);
+            mock.Map<double?, GetInterestRateQueryResponse>(Arg.Is<double?>(interestRate => interestRate.HasValue)).Returns(GetInterestRateResponseSpecimen.For.ValidRequest);
 
-            mock.When(x => x.Map<decimal?, GetInterestRateQueryResponse>(Arg.Is<decimal?>(interestRate => !interestRate.HasValue))).Do(response => { throw new NotFoundCustomException(); });
+            mock.When(x => x.Map<double?, GetInterestRateQueryResponse>(Arg.Is<double?>(interestRate => !interestRate.HasValue))).Do(response => { throw new NotFoundCustomException(); });
 
             return mock;
         }

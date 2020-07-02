@@ -31,7 +31,7 @@ namespace Management.Interest.Infrastructure.Data.Query.Tests.Unit.Queries.v1.Ge
         {
             var mock = Substitute.For<ICacheService>();
 
-            mock.When(x => x.CacheResponseAsync(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<TimeSpan>())).Do(x => { throw new CacheRequestFailedException(); });
+            mock.When(x => x.GetCachedResponseAsync<double?>(Arg.Any<string>())).Do(x => { throw new CacheRequestFailedException(); });
 
             return mock;
         }
