@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>bin\Management.Interest.CrossCutting.Exception.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

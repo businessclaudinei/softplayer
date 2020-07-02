@@ -31,7 +31,7 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
 
             Task.Run(() => SetCalculatedValuesHistory(command, interestRateServiceResponse.InterestRate, compoundInterestAmount));
 
-            return new CalculateInterestCommandResponse { CompoundInterestAmount = compoundInterestAmount };
+            return new CalculateInterestCommandResponse { CompoundInterestAmount = compoundInterestAmount, CurrencyCode = CustomSettings.Settings.Interest.DefaultCurrencyCode};
         }
 
         private async Task SetCalculatedValuesHistory(CalculateInterestCommand command, double interestRate, double compoundInterestAmount)

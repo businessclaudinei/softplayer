@@ -1,35 +1,42 @@
-﻿version: "3"
+﻿version: "3.5"
 
 services:
+  redisinterest:
+    container_name: redisinterest
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - softplayer-network
+
   management-interest-api:
+    container_name: managementinterestapi
     image: management-interest-api
     build:
       context: ./Management.Interest
+      dockerfile: Dockerfile
     ports:
-      - "5000:80"
-    networks:
-      - softplayer-network
-    depends_on:
-      - "redisinterest"
-  
-  accounting-interest-api:
-    image: accounting-interest-api
-    build:
-      context: ./Accounting.Interest
-    ports:
-      - "5001:80"
+      - "8000:80"
     networks:
       - softplayer-network
     depends_on:
       - "redisinterest"
 
-  redisinterest:
-    image: redis:alpine
+  accounting-interest-api:
+    container_name: accountinginterestapi
+    image: accounting-interest-api
+    build:
+      context: ./Accounting.Interest
+      dockerfile: Dockerfile
     ports:
-      - "16379:6379"
+      - "8001:80"
     networks:
       - softplayer-network
+    depends_on:
+      - "management-interest-api"
+      - "redisinterest"
 
 networks: 
     softplayer-network:
         driver: bridge
+        name: softplayernetwork

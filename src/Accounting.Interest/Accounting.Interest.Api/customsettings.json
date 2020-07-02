@@ -3,7 +3,8 @@
     "cache": {
       "key": "compoundInterestRate",
       "timeToLive": 15
-    }
+    },
+    "defaultCurrencyCode": "BRL" 
   },
   "gitHubRepositoryUrl": "https://github.com/businessclaudinei/softplayer"
 }
