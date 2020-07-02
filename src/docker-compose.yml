@@ -1,7 +1,8 @@
-﻿version: "3"
+﻿version: "3.5"
 
 services:
   redisinterest:
+    container_name: redisinterest
     image: redis:alpine
     ports:
       - "6379:6379"
@@ -9,6 +10,7 @@ services:
       - softplayer-network
 
   management-interest-api:
+    container_name: managementinterestapi
     image: management-interest-api
     build:
       context: ./Management.Interest
@@ -21,6 +23,7 @@ services:
       - "redisinterest"
 
   accounting-interest-api:
+    container_name: accountinginterestapi
     image: accounting-interest-api
     build:
       context: ./Accounting.Interest
@@ -36,3 +39,4 @@ services:
 networks: 
     softplayer-network:
         driver: bridge
+        name: softplayernetwork
