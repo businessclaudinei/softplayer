@@ -9,7 +9,7 @@ namespace Accounting.Interest.Infrastructure.Service.ServiceHandler.Management
 {
     public class ManagementInterestApiServiceClient : HttpServiceClient, IManagementInterestApiServiceClient
     {
-        public ManagementInterestApiServiceClient(IHttpClientFactory httpClientFactory, ILogger logger) 
+        public ManagementInterestApiServiceClient(IHttpClientFactory httpClientFactory, ILogger logger)
             : base(httpClientFactory, logger)
         {
         }
@@ -18,14 +18,10 @@ namespace Accounting.Interest.Infrastructure.Service.ServiceHandler.Management
 
         public async Task<InterestRateServiceResponse> GetInterestRate()
         {
-
-            //request.Headers.Add("Accept", "application/json");
-            //request.Headers.Add("Content-Type", "application/json");
-
             var response = await GetAsync<InterestRateServiceResponse>("v1/taxa-juros");
 
             if (!response.HttpResponse.IsSuccessStatusCode)
-                throw new ApiHttpCustomException();
+                throw new ApiHttpCustomException(response.HttpResponse.Content.ReadAsStringAsync().Result, response.HttpResponse.StatusCode);
 
             return await response.GetContentObjectAsync();
         }

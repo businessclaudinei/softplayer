@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using SimpleInjector;
 using System;
 using System.Globalization;
@@ -138,19 +137,18 @@ namespace Accounting.Interest.Api
 
         private void ConfigureSwagger(IServiceCollection services)
         {
-            services.AddSwaggerGen(config =>
-            {
-                config.SwaggerDoc("v1", new OpenApiInfo
+            services.AddSwaggerGen(options => {
+                options.DescribeAllEnumsAsStrings();
+                options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
                 {
                     Title = "API Contabilização de Juros",
                     Version = "v1",
                     Description = "Api para calcular taxa de juros.",
-                    TermsOfService = new Uri("https://example.com/terms")
+                    TermsOfService = "https://example.com/terms"
                 });
-                
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                config.IncludeXmlComments(xmlPath);
+                options.IncludeXmlComments(xmlPath);
             });
         }
 

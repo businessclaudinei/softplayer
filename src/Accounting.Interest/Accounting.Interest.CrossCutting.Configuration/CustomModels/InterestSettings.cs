@@ -9,5 +9,11 @@ namespace Accounting.Interest.CrossCutting.Configuration.CustomModels
         /// </summary>
         [JsonProperty("cache")]
         public CacheSettings Cache { get; set; }
+
+        /// <summary>
+        /// The interest's default currency code
+        /// </summary>
+        [JsonProperty("defaultCurrencyCode")]
+        public string DefaultCurrencyCode { get; set; }
     }
 }

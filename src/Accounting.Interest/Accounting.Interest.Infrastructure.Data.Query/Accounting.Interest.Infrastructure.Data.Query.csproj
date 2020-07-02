@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.2\Accounting.Interest.Infrastruture.Data.Query\Accounting.Interest.Infrastruture.Data.Query.xml</DocumentationFile>
+  <PropertyGroup>
+    <DocumentationFile>bin\Accounting.Interest.Infrastruture.Data.Query\Accounting.Interest.Infrastruture.Data.Query.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

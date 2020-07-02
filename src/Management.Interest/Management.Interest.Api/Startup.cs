@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation.AspNetCore;
 using Management.Interest.Api.Filters;
 using Management.Interest.CrossCutting.Configuration.AppModels;
@@ -14,12 +10,15 @@ using Management.Interest.Infrastruture.Service.Resources.Cache;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
+using System.Reflection;
 
-namespace Management.Interest {
+namespace Management.Interest
+{
     public class Startup {
         public Startup (IConfiguration configuration) {
             Configuration = configuration;
@@ -55,8 +54,6 @@ namespace Management.Interest {
                 app.UseHsts ();
             }
 
-            app.UseRequestLocalization (SetUpLocalization ());
-
             app.UseSwagger ();
             app.UseSwaggerUI (c => {
                 c.SwaggerEndpoint ("/swagger/v1/swagger.json", "API Gerenciamento de Juros V1");
@@ -80,19 +77,6 @@ namespace Management.Interest {
 
             services.AddStackExchangeRedisCache (options => options.Configuration = redisConnectionString);
             services.AddSingleton<ICacheService, CacheService> ();
-        }
-
-        private RequestLocalizationOptions SetUpLocalization () {
-            var culture = new CultureInfo (AppSettings.Settings.AppLocale);
-
-            var localizationOptions = new RequestLocalizationOptions {
-                DefaultRequestCulture = new RequestCulture (culture: culture, uiCulture: culture)
-            };
-
-            localizationOptions.SupportedCultures.Add (culture);
-            localizationOptions.SupportedUICultures.Add (culture);
-
-            return localizationOptions;
         }
 
         private void ConfigureSwagger (IServiceCollection services) {

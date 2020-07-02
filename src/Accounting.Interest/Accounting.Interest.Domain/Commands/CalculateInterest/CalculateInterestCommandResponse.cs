@@ -6,15 +6,15 @@ namespace Accounting.Interest.Domain.Commands.CalculateInterest
     public class CalculateInterestCommandResponse
     {
         /// <summary>
-        /// Valor do juros composto
+        /// The compound interest aAmount
         /// </summary>
         [JsonProperty("compoundInterestAmount")]
         public double CompoundInterestAmount { get; set; }
 
         /// <summary>
-        /// Valor do juros composto formatado
+        /// The compound interest amount's currency code
         /// </summary>
-        [JsonProperty("formattedCompoundInterestAmount")]
-        public string FormattedCompoundInterestAmount { get { return CompoundInterestAmount.ToString("c"); } }
+        [JsonProperty("currencyCode")]
+        public string CurrencyCode { get; set; }
     }
 }
