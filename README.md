@@ -27,7 +27,7 @@ Este documento provê um tutorial de instalação e os endpoints das Apis.
  5. Rodar o projeto Accounting.Interest.Api
  6. Executar o arquivo em src\Management.Interest\Management.Interest.sln
  7. Rodar o projeto Management.Interest.Api
- 8. Abrir o browser no endereço https://localhost:5001/swagger
+ 8. Abrir o browser no endereço http://localhost:5001/swagger
 
 #### Modo Docker
 	
@@ -172,7 +172,7 @@ Este documento provê um tutorial de instalação e os endpoints das Apis.
 		---
 ##### Mostra Código Fonte v1
 
-- [ *GET* taxa-juros ]
+- [ *GET* show-me-the-code ]
 
 	- **Description:** Este método é responsável por apresentar o código fonte no GitHub. A resposta do método é a url do repositório Github.
 
